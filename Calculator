@@ -1,5 +1,5 @@
 #This is a program designed to introduce itself, ask you to input two variables into the quadratic formula and tell you the discriminant and solution(s) to the equation
-#as a reference the discriminant is b**2-4*a*c (verified correct in code), and the equation is x=(-b(+/-)root(b**2-4*a*c))/2a
+#as a reference the discriminant is b**2-4*a*c, and the equation is x=(-b(+/-)root(b**2-4*a*c))/2a
 #testing discriminant in code:
 
 #casefold
