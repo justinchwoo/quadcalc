@@ -1,10 +1,7 @@
 #This is a program designed to introduce itself, ask you to input two variables into the quadratic formula and tell you the discriminant and solution(s) to the equation
 #as a reference the discriminant is b**2-4*a*c, and the equation is x=(-b(+/-)root(b**2-4*a*c))/2a
-#testing discriminant in code:
 
-#casefold
-#elif
-#compress other loops
+#Plan to include: casefold, elif, compress other loops
 
 #variables
 ready_gate = False #used to repeat program after completion
