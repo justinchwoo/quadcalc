@@ -1,0 +1,133 @@
+#This is a program designed to introduce itself, ask you to input two variables into the quadratic formula and tell you the discriminant and solution(s) to the equation
+#as a reference the discriminant is b**2-4*a*c (verified correct in code), and the equation is x=(-b(+/-)root(b**2-4*a*c))/2a
+#testing discriminant in code:
+
+#casefold
+#elif
+#compress other loops
+
+#variables
+ready_gate = False #used to repeat program after completion
+ready_void = False #used to make sure the ready_gate only recieves y/n values
+val_chk = 0
+value_void = True #used in fn_
+a = 0
+b = 0
+c = 0
+yn_input_check = 'yYnN'
+ready_check = 'yY'
+
+#importing math module
+import cmath
+import math
+
+#functions
+
+def value_chk(value_name):
+    value_void = True
+    value_input = input('What is the ' + value_name + ' value : ')  # input the value of the 'number' to be checked
+    while value_void:
+        try:
+            value = int(value_input)
+            value_void = False
+            return value
+        except ValueError:
+            try:
+                value = float(value_input)
+                value_void = False
+                return value
+            except ValueError:
+                print('Please input a number!')
+                value_input = input('What is the ' + value_name + ' value : ')
+
+
+def login(password_chk):
+    username_login = input('Please enter a name: ')
+    password = input('Please enter the required password: ')
+    while not password == password_chk:
+        password = input('Please enter the correct password: ')
+    print('You have logged in! Please wait a moment \b ...')
+    return username_login
+
+#Welcoming user and preparing input
+print('Welcome to the quadratic formula calculator!')
+print('Version 1.0')
+
+
+#Setting the Password
+password_chk = 'Python'
+
+userid = login(password_chk)
+print('Welcome ' + userid + '! Please have your equation prepared in the format of ax^2+bx+c')
+
+#Ready gate question
+ready_str = input('Are you ready? Y/N: ') #input value into "ready"
+ready_gate = ready_str == 'Y' or ready_str == 'y'
+while not ready_gate:
+    print('Please type \'Y\' to continue')
+    ready_str = input('Are you ready? (Y/N) ')
+    ready_gate = ready_str == 'Y' or ready_str == 'y'
+
+#Restart loop
+while ready_gate:
+
+    #Prompting input
+    a = value_chk('a')
+    b = value_chk('b')
+    c = value_chk('c')
+
+    #determining discriminant test [+ve 1,5,4; -ve 1,0,25; zero -4,-12,-9]
+    d_val=b ** 2 - 4 * a * c
+
+    #printing preparing calculation
+    print('Preparing your calculation \n ... \n ...')
+
+    #calculating discriminant and how many solutions it will have
+    if d_val == 0:
+       d_sign = 'zero'
+    elif d_val > 0:
+        d_sign = 'positive'
+    elif d_val < 0:
+        d_sign = 'negative'
+    else:
+        print('Error! Number unable to be calculated!')
+        exit()
+
+    #presenting above calculation
+    d_str = str(d_val)
+    print('The discriminant is ' + d_str + ' and it is ' + d_sign)
+
+    #calculating solution
+    #if discriminant => 0, calculate value(s) into s1 and s2
+    #if discriminant < 0, calculate and simplify in the form of u/v
+    if d_val == 0:
+        s1 = (-b + math.sqrt(b ** 2 - 4 * a * c))  / (2 * a)
+        s1_str = str(s1) #saving value to string
+    else:
+        if d_val > 0:
+            s1, s2 = (-b + math.sqrt(b ** 2 - 4 * a * c))  / (2 * a),(-b + math.sqrt(b ** 2 - 4 * a * c))  / (2 * a)
+            s1_str, s2_str = str(s1), str(s2) #saving both values to string
+        else:
+            u1, u2 = -b + cmath.sqrt(b ** 2 - 4 * a * c), -b - cmath.sqrt(b ** 2 - 4 * a * c)
+            v = 2*a
+            u1_str, u2_str, v_str = str(u1), str(u2), str(v) #saving values to string
+
+    #Printing solutions
+    if d_val == 0:
+        print('The solution is ' + s1_str)
+    else:
+        if d_val > 0:
+            print('The solutions are ' + s1_str + ', and ' + s2_str)
+        else:
+            print('The solutions are ' + u1_str + '/' + v_str + ', and ' + 'and' + u2_str + '/' + v_str)
+
+    #Validity check
+    ready_str = input('Do you want to continue? (Y/N): ')
+    while ready_str not in yn_input_check:
+        ready_str = input('Please input (Y/N): ')
+    if ready_str not in ready_check:
+        print('Thank you for using the quadratic formula calculator!')
+        print('Have a wonderful day!')
+        import datetime
+        print('Program terminated at ' + str(datetime.datetime.now()))
+        exit()
